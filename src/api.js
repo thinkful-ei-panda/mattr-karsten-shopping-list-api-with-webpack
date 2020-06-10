@@ -5,18 +5,37 @@ const getItems = function () {
 };
 
 const createItem = function (name) {
-  const newItem = JSON.stringify({name});
-  
+  const newItem = JSON.stringify({ name });
+
   return fetch(`${BASE_URL}/items`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: newItem
+    body: newItem,
+  });
+};
+
+const updateItem = function (id, updateData) {
+  const newData = JSON.stringify(updateData);
+  return fetch(`${BASE_URL}/items/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: newData,
+  });
+};
+
+const deleteItem = function (id) {
+  return fetch(BASE_URL + '/items/' + id, {
+    method: 'DELETE',
   });
 };
 
 export default {
   getItems,
-  createItem
+  createItem,
+  updateItem,
+  deleteItem,
 };
